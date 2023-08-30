@@ -33,6 +33,7 @@ export default function LeaderboardCard({
             height={64}
             alt="Avatar"
             className="shrink-0 rounded-full"
+            unoptimized={true}
           ></Image>
           <h1 className="grow overflow-hidden text-ellipsis whitespace-nowrap">
             {user.global_name ?? user.username}
