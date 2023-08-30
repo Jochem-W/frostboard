@@ -29,10 +29,7 @@ export async function selectUser(id: string) {
 
 export async function selectUsers(limit?: number) {
   const query = orm
-    .select({
-      user: usersTable,
-      position: sql<string>`row_number() OVER ()`,
-    })
+    .select()
     .from(usersTable)
     .orderBy(desc(usersTable.level), desc(usersTable.xp), asc(usersTable.id))
 

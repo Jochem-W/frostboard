@@ -11,22 +11,22 @@ export default function LeaderboardEntry({
   level,
 }: {
   user: APIUser
-  position: string
+  position: number
   xp: number
   xpMax: number
   level: number
 }) {
   let colour
   switch (position) {
-    case "1":
+    case 1:
       colour =
         "from-amber-400 to-yellow-400 dark:from-amber-500 dark:to-yellow-500"
       break
-    case "2":
+    case 2:
       colour =
         "from-neutral-400 to-neutral-400 dark:from-neutral-500 dark:to-neutral-500"
       break
-    case "3":
+    case 3:
       colour =
         "from-brown-500 to-brown-500 dark:from-brown-900 dark:to-brown-900"
       break

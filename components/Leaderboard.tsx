@@ -9,9 +9,9 @@ export default async function Leaderboard() {
   const users = []
   for (const entry of dbResult) {
     const discordUser = (await discord.get(
-      Routes.user(entry.user.id),
+      Routes.user(entry.id),
     )) as RESTGetAPIUserResult
-    users.push({ ...entry.user, ...discordUser, position: entry.position })
+    users.push({ ...entry, ...discordUser, position: users.length + 1 })
   }
 
   return (
