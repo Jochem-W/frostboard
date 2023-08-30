@@ -14,8 +14,6 @@ const model = z.object({
   avatar: z.string().nullable().optional().default(null),
 })
 
-export const revalidate = 0
-
 export default async function Page({
   params,
   searchParams,
