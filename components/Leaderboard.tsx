@@ -21,7 +21,7 @@ export default async function Leaderboard() {
           position={user.position}
           user={user}
           key={user.id}
-          level={user.xp}
+          level={user.level}
           xp={user.xp}
           xpMax={12 * user.level + 33}
         ></LeaderboardEntry>
