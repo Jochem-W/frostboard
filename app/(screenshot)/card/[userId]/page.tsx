@@ -1,35 +1,10 @@
 import LeaderboardCard from "@/components/LeaderboardCard"
 import { usersTable } from "@/schema"
+import { selectUser } from "@/utils/db"
 import discord from "@/utils/discord"
 import orm from "@/utils/orm"
 import { Routes, RESTGetAPIUserResult } from "discord-api-types/v10"
-import { asc, desc } from "drizzle-orm"
-import { eq, sql } from "drizzle-orm"
 import { z } from "zod"
-
-const position = sql<string>`row_number() OVER (ORDER BY ${desc(
-  usersTable.level,
-)}, ${desc(usersTable.xp)}, ${asc(usersTable.id)})`.as("position")
-
-const userPosition = orm
-  .select({
-    id: usersTable.id,
-    position,
-  })
-  .from(usersTable)
-  .as("userPosition")
-
-async function select(id: string) {
-  const [user] = await orm
-    .select({
-      user: usersTable,
-      position: userPosition.position,
-    })
-    .from(usersTable)
-    .where(eq(usersTable.id, id))
-    .innerJoin(userPosition, eq(userPosition.id, id))
-  return user ? user : null
-}
 
 const model = z.object({
   id: z.string(),
@@ -69,17 +44,17 @@ export default async function Page({
     allowInsert = true
   }
 
-  let dbResult = await select(params.userId)
+  let dbResult = await selectUser(params.userId)
   if (!dbResult) {
     if (allowInsert) {
       await orm.insert(usersTable).values({ id: params.userId })
-      dbResult = await select(params.userId)
+      dbResult = await selectUser(params.userId)
     } else {
       user = (await discord.get(
         Routes.user(params.userId),
       )) as RESTGetAPIUserResult
       await orm.insert(usersTable).values({ id: params.userId })
-      dbResult = await select(params.userId)
+      dbResult = await selectUser(params.userId)
     }
 
     if (!dbResult) {
