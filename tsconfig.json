@@ -1,0 +1,11 @@
+{
+  "extends": ["@tsconfig/strictest", "@tsconfig/node20", "@tsconfig/next"],
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next"]
+}
