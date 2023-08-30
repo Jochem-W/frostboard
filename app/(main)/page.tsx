@@ -3,6 +3,8 @@ import discord from "@/utils/discord"
 import { Variables } from "@/utils/variables"
 import { Routes, RESTGetAPIGuildResult } from "discord-api-types/v10"
 
+export const dynamic = "force-dynamic"
+
 export default async function Home() {
   const guild = (await discord.get(
     Routes.guild(Variables.guildId),
