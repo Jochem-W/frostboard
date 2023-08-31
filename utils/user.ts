@@ -19,7 +19,7 @@ export function avatarUrl(
     )}?size=${size}`
   }
 
-  if (user.discriminator) {
+  if (user.discriminator !== "0") {
     return `https://cdn.discordapp.com/${CDNRoutes.defaultUserAvatar(
       (parseInt(user.discriminator) % 5) as DefaultUserAvatarAssets,
     )}?size=${size}`
