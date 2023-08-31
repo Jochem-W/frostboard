@@ -24,7 +24,7 @@ export default function LeaderboardCard({
       className="relative flex h-[512px] w-[1025px] flex-col bg-gradient-to-r from-blue-500  to-cyan-500 text-5xl font-thin text-white before:absolute before:right-0 before:top-0 before:h-full before:w-[--width] before:bg-neutral-800"
       style={{ "--width": `${100 - 100 * (xp / xpMax)}%` } as CSSProperties}
     >
-      <div className="absolute left-0 top-0 flex w-full items-center justify-between gap-6 bg-black bg-opacity-30 p-4">
+      <div className="absolute left-0 top-0 flex w-full items-center justify-between gap-8 bg-black bg-opacity-30 p-4">
         <span>#{position}</span>
         <div className="flex min-w-0 grow basis-0 items-center gap-4">
           <Image
