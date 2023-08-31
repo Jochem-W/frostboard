@@ -1,7 +1,7 @@
 import "@/app/globals.css"
-import { JetBrains_Mono } from "next/font/google"
+import { Rubik } from "next/font/google"
 
-const mono = JetBrains_Mono({ subsets: ["latin"], weight: "variable" })
+const mono = Rubik({ subsets: ["latin"], weight: "variable" })
 
 export default function RootLayout({
   children,
