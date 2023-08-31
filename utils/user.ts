@@ -10,12 +10,15 @@ import "server-only"
 export function avatarUrl(
   user: Pick<APIUser, "avatar" | "id" | "discriminator">,
   size: ImageSize = 32,
+  format?: ImageFormat,
 ) {
   if (user.avatar) {
     return `https://cdn.discordapp.com/${CDNRoutes.userAvatar(
       user.id,
       user.avatar,
-      user.avatar.startsWith("a_") ? ImageFormat.GIF : ImageFormat.WebP,
+      format ?? user.avatar.startsWith("a_")
+        ? ImageFormat.GIF
+        : ImageFormat.WebP,
     )}?size=${size}`
   }
 
