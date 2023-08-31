@@ -3,6 +3,7 @@ import {
   CDNRoutes,
   DefaultUserAvatarAssets,
   ImageFormat,
+  UserAvatarFormat,
 } from "discord-api-types/v10"
 import { ImageSize } from "@discordjs/rest"
 import "server-only"
@@ -10,15 +11,14 @@ import "server-only"
 export function avatarUrl(
   user: Pick<APIUser, "avatar" | "id" | "discriminator">,
   size: ImageSize = 32,
-  format?: ImageFormat,
+  format?: UserAvatarFormat,
 ) {
   if (user.avatar) {
     return `https://cdn.discordapp.com/${CDNRoutes.userAvatar(
       user.id,
       user.avatar,
-      format ?? user.avatar.startsWith("a_")
-        ? ImageFormat.GIF
-        : ImageFormat.WebP,
+      format ??
+        (user.avatar?.startsWith("_") ? ImageFormat.GIF : ImageFormat.WebP),
     )}?size=${size}`
   }
 
