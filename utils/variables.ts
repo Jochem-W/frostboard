@@ -1,5 +1,6 @@
 import z from "zod"
 import camelcaseKeys from "camelcase-keys"
+import "server-only"
 
 const model = z
   .object({

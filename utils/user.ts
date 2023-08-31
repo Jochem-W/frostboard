@@ -5,6 +5,7 @@ import {
   ImageFormat,
 } from "discord-api-types/v10"
 import { ImageSize } from "@discordjs/rest"
+import "server-only"
 
 export function avatarUrl(
   user: Pick<APIUser, "avatar" | "id" | "discriminator">,

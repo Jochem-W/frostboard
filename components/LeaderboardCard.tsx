@@ -14,7 +14,7 @@ export default function LeaderboardCard({
     APIUser,
     "avatar" | "global_name" | "username" | "id" | "discriminator"
   >
-  position: string
+  position: number
   xp: number
   xpMax: number
   level: number

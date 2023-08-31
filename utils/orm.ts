@@ -1,6 +1,7 @@
 import postgres from "postgres"
 import { drizzle } from "drizzle-orm/postgres-js"
 import { Variables } from "./variables"
+import "server-only"
 
 function singleton() {
   return drizzle(postgres(Variables.databaseUrl))

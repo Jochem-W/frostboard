@@ -1,5 +1,6 @@
 import { REST } from "@discordjs/rest"
 import { Variables } from "./variables"
+import "server-only"
 
 function singleton() {
   //@ts-expect-error

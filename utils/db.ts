@@ -2,10 +2,11 @@ import { usersTable } from "@/schema"
 import { eq } from "drizzle-orm"
 import orm from "./orm"
 import { sql, desc, asc } from "drizzle-orm"
+import "server-only"
 
 const position = sql<string>`row_number() OVER (ORDER BY ${desc(
-  usersTable.level,
-)}, ${desc(usersTable.xp)}, ${asc(usersTable.id)})`.as("position")
+  usersTable.xp,
+)}, ${asc(usersTable.id)})`.as("position")
 
 const userPosition = orm
   .select({
@@ -31,7 +32,7 @@ export async function selectUsers(limit?: number) {
   const query = orm
     .select()
     .from(usersTable)
-    .orderBy(desc(usersTable.level), desc(usersTable.xp), asc(usersTable.id))
+    .orderBy(desc(usersTable.xp), asc(usersTable.id))
 
   if (limit) {
     return await query.limit(limit)
