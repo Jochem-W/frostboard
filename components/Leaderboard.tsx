@@ -18,7 +18,7 @@ export default async function Leaderboard() {
   return (
     <div className="flex w-full flex-col gap-4">
       {users.map((user) => {
-        const level = Math.floor(1 + levelForTotalXp(user.xp))
+        const level = levelForTotalXp(user.xp)
         const previousLevel = level - 1
         if (previousLevel >= 0) {
           user.xp -= totalXpForLevel(previousLevel)

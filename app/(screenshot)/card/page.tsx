@@ -27,7 +27,7 @@ export default async function Page({
 }) {
   const parsed = await model.parseAsync(searchParams)
 
-  const level = Math.floor(1 + levelForTotalXp(parsed.xp))
+  const level = levelForTotalXp(parsed.xp)
   const previousLevel = level - 1
   if (previousLevel >= 0) {
     parsed.xp -= totalXpForLevel(previousLevel)

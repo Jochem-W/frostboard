@@ -10,5 +10,7 @@ export function totalXpForLevel(level: number) {
 }
 
 export function levelForTotalXp(xp: number) {
-  return (1 / a) * (Math.sqrt(2 * a * xp + (b - a / 2) ** 2) - (a / 2 + b))
+  return Math.floor(
+    1 + (1 / a) * (Math.sqrt(2 * a * xp + (b - a / 2) ** 2) - (a / 2 + b)),
+  )
 }
