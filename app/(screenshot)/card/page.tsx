@@ -1,5 +1,5 @@
 import LeaderboardCard from "@/components/LeaderboardCard"
-import { levelForTotalXp, totalXpForLevel, xpForLevel } from "@/utils/xp"
+import { levelForTotalXp, totalXpForLevel, xpForLevelUp } from "@/utils/xp"
 import { z } from "zod"
 
 const model = z.object({
@@ -28,17 +28,14 @@ export default async function Page({
   const parsed = await model.parseAsync(searchParams)
 
   const level = levelForTotalXp(parsed.xp)
-  const previousLevel = level - 1
-  if (previousLevel >= 0) {
-    parsed.xp -= totalXpForLevel(previousLevel)
-  }
+  parsed.xp -= totalXpForLevel(level)
 
   return (
     <LeaderboardCard
       user={parsed}
       position={parsed.position}
       xp={parsed.xp}
-      xpMax={xpForLevel(level)}
+      xpMax={xpForLevelUp(level)}
       level={level}
     ></LeaderboardCard>
   )

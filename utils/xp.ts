@@ -1,12 +1,12 @@
 const a = 12
 const b = 33
 
-export function xpForLevel(level: number) {
+export function xpForLevelUp(level: number) {
   return a * level + b
 }
 
 export function totalXpForLevel(level: number) {
-  return (1 / 2) * a * level ** 2 + ((1 / 2) * a + b) * level + b
+  return (a / 2) * level ** 2 + (b - a / 2) * level
 }
 
 export function levelForTotalXp(xp: number) {

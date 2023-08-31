@@ -2,7 +2,7 @@ import { RESTGetAPIUserResult, Routes } from "discord-api-types/v10"
 import LeaderboardEntry from "./LeaderboardEntry"
 import discord from "@/utils/discord"
 import { selectUsers } from "@/utils/db"
-import { levelForTotalXp, totalXpForLevel, xpForLevel } from "@/utils/xp"
+import { levelForTotalXp, totalXpForLevel, xpForLevelUp } from "@/utils/xp"
 
 export default async function Leaderboard() {
   const dbResult = await selectUsers(1)
@@ -19,10 +19,7 @@ export default async function Leaderboard() {
     <div className="flex w-full flex-col gap-4">
       {users.map((user) => {
         const level = levelForTotalXp(user.xp)
-        const previousLevel = level - 1
-        if (previousLevel >= 0) {
-          user.xp -= totalXpForLevel(previousLevel)
-        }
+        user.xp -= totalXpForLevel(level)
 
         return (
           <LeaderboardEntry
@@ -31,7 +28,7 @@ export default async function Leaderboard() {
             key={user.id}
             level={level}
             xp={user.xp}
-            xpMax={xpForLevel(level)}
+            xpMax={xpForLevelUp(level)}
           ></LeaderboardEntry>
         )
       })}
