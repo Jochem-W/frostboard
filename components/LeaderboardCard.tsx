@@ -34,6 +34,8 @@ export default function LeaderboardCard({
             alt="Avatar"
             className="shrink-0 rounded-full"
             unoptimized={true}
+            priority={true}
+            loading={"eager"}
           ></Image>
           <h1 className="grow overflow-hidden text-ellipsis whitespace-nowrap">
             {user.global_name ?? user.username}
