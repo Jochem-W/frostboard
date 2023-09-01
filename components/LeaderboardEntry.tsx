@@ -1,5 +1,4 @@
 import { avatarUrl } from "@/utils/user"
-import { APIUser } from "discord-api-types/v10"
 import Image from "next/image"
 import { CSSProperties } from "react"
 
@@ -10,7 +9,12 @@ export default function LeaderboardEntry({
   xpMax,
   level,
 }: {
-  user: APIUser
+  user: {
+    id: string
+    discriminator: string
+    name: string
+    avatar: string | null
+  }
   position: number
   xp: number
   xpMax: number
@@ -44,15 +48,13 @@ export default function LeaderboardEntry({
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Image
-              src={avatarUrl(user)}
+              src={avatarUrl(user, 32)}
               width={32}
               height={32}
               alt="Avatar"
               className="shrink-0 rounded-full"
             ></Image>
-            <span className="break-all">
-              {user.global_name ?? user.username}
-            </span>
+            <span className="break-all">{user.name}</span>
           </div>
           <span>level {level}</span>
         </div>

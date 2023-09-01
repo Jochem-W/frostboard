@@ -33,6 +33,7 @@ export async function selectUsers(limit?: number) {
     .select()
     .from(usersTable)
     .orderBy(desc(usersTable.xp), asc(usersTable.id))
+    .where(eq(usersTable.member, true))
 
   if (limit) {
     return await query.limit(limit)

@@ -1,5 +1,4 @@
 import { avatarUrl } from "@/utils/user"
-import { APIUser, ImageFormat } from "discord-api-types/v10"
 import Image from "next/image"
 import { CSSProperties } from "react"
 
@@ -10,10 +9,12 @@ export default function LeaderboardCard({
   xpMax,
   level,
 }: {
-  user: Pick<
-    APIUser,
-    "avatar" | "global_name" | "username" | "id" | "discriminator"
-  >
+  user: {
+    name: string
+    id: string
+    discriminator: string
+    avatar: string | null
+  }
   position: number
   xp: number
   xpMax: number
@@ -28,7 +29,7 @@ export default function LeaderboardCard({
         <span>#{position}</span>
         <section className="flex min-w-0 grow basis-0 items-center gap-4">
           <Image
-            src={avatarUrl(user, 128, ImageFormat.WebP)}
+            src={avatarUrl(user, 128)}
             width={80}
             height={80}
             alt="Avatar"
@@ -38,7 +39,7 @@ export default function LeaderboardCard({
             loading={"eager"}
           ></Image>
           <h1 className="overflow-hidden text-ellipsis whitespace-nowrap">
-            {user.global_name ?? user.username}
+            {user.name}
           </h1>
         </section>
         <span className="lowercase">Level {level}</span>

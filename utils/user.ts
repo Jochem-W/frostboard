@@ -10,7 +10,7 @@ import "server-only"
 
 export function avatarUrl(
   user: Pick<APIUser, "avatar" | "id" | "discriminator">,
-  size: ImageSize = 32,
+  size: ImageSize,
   format?: UserAvatarFormat,
 ) {
   if (user.avatar) {

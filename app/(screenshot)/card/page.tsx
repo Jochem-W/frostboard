@@ -4,11 +4,10 @@ import { z } from "zod"
 
 const model = z.object({
   id: z.string(),
-  username: z.string(),
+  name: z.string(),
   discriminator: z.string(),
   xp: z.coerce.number(),
   position: z.coerce.number(),
-  global_name: z.string().nullable().optional().default(null),
   avatar: z.string().nullable().optional().default(null),
 })
 
@@ -17,8 +16,7 @@ export default async function Page({
 }: {
   searchParams: {
     id?: string
-    global_name?: string
-    username?: string
+    name?: string
     avatar?: string
     discriminator?: string
     xp?: string
