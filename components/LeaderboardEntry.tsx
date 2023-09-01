@@ -1,4 +1,5 @@
-import { avatarUrl } from "@/utils/user"
+"use client"
+
 import Image from "next/image"
 import { CSSProperties } from "react"
 
@@ -13,7 +14,7 @@ export default function LeaderboardEntry({
     id: string
     discriminator: string
     name: string
-    avatar: string | null
+    avatarUrl: string
   }
   position: number
   xp: number
@@ -48,7 +49,7 @@ export default function LeaderboardEntry({
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Image
-              src={avatarUrl(user, 32)}
+              src={user.avatarUrl}
               width={32}
               height={32}
               alt="Avatar"
