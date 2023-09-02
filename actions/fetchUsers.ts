@@ -4,6 +4,7 @@ import { usersTable } from "@/schema"
 import { desc, asc, eq } from "drizzle-orm"
 import orm from "../utils/orm"
 import { avatarUrl } from "../utils/user"
+import { ImageFormat } from "discord-api-types/v10"
 
 export type User = Awaited<ReturnType<typeof fetchUsers>>[0]
 
@@ -28,7 +29,7 @@ export default async function fetchUsers(limit?: number, offset?: number) {
     id: user.id,
     name: user.name,
     discriminator: user.discriminator,
-    avatarUrl: avatarUrl(user, { animatedSizeOverride: 128 }),
+    avatarUrl: avatarUrl(user, { animatedFormat: ImageFormat.PNG }),
     xp: user.xp,
     avatarFallback: avatarUrl({
       id: user.id,
