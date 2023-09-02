@@ -40,30 +40,30 @@ export default function LeaderboardEntry({
   }
 
   return (
-    <div
-      className={`${colour} relative flex w-full gap-4 overflow-hidden break-words border border-neutral-200 bg-gradient-to-r px-2 py-4 font-extralight before:absolute before:right-0 before:top-0 before:h-full before:w-[--width] before:bg-neutral-100 dark:border-neutral-700 before:dark:bg-neutral-800`}
+    <section
+      className={`${colour} relative flex w-full gap-4 overflow-hidden break-words border border-neutral-200 bg-gradient-to-r px-2 py-4 text-2xl font-extralight before:absolute before:right-0 before:top-0 before:h-full before:w-[--width] before:bg-neutral-100 dark:border-neutral-700 before:dark:bg-neutral-800 sm:text-3xl`}
       style={{ "--width": `${100 - 100 * (xp / xpMax)}%` } as CSSProperties}
     >
-      <span className="z-10 flex items-center text-3xl">#{position}</span>
-      <div className="z-10 flex grow flex-col justify-center gap-2 p-2">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
+      <span className="z-10 flex items-center">#{position}</span>
+      <section className="z-10 flex grow flex-col justify-center gap-2 p-2">
+        <header className="flex flex-wrap items-center justify-between gap-4">
+          <section className="flex items-center gap-4">
             <Image
               src={user.avatarUrl}
-              width={32}
-              height={32}
+              width={48}
+              height={48}
               alt="Avatar"
               className="shrink-0 rounded-full"
             ></Image>
             <span className="break-all">{user.name}</span>
-          </div>
+          </section>
           <span>level {level}</span>
-        </div>
-        <span className="text-sm">
-          <span className="text-4xl font-bold">{xp}</span>
+        </header>
+        <span className="text-sm sm:text-lg">
+          <span className="text-3xl font-bold sm:text-7xl">{xp}</span>
           <wbr></wbr>/{xpMax} xp
         </span>
-      </div>
-    </div>
+      </section>
+    </section>
   )
 }
