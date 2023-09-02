@@ -1,4 +1,5 @@
 import { avatarUrl } from "@/utils/user"
+import { ImageFormat } from "discord-api-types/v10"
 import Image from "next/image"
 import { CSSProperties } from "react"
 
@@ -29,7 +30,10 @@ export default function LeaderboardCard({
         <span>#{position}</span>
         <section className="flex min-w-0 grow basis-0 items-center gap-4">
           <Image
-            src={avatarUrl(user, 128)}
+            src={avatarUrl(user, {
+              animatedFormat: ImageFormat.PNG,
+              size: 128,
+            })}
             width={80}
             height={80}
             alt="Avatar"

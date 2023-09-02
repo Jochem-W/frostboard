@@ -29,12 +29,12 @@ export default async function fetchUsers(limit?: number, offset?: number) {
     id: user.id,
     name: user.name,
     discriminator: user.discriminator,
-    avatarUrl: avatarUrl(user, 64, ImageFormat.WebP),
+    avatarUrl: avatarUrl(user),
     xp: user.xp,
-    avatarFallback: avatarUrl(
-      { id: user.id, discriminator: user.discriminator, avatar: null },
-      64,
-      ImageFormat.WebP,
-    ),
+    avatarFallback: avatarUrl({
+      id: user.id,
+      discriminator: user.discriminator,
+      avatar: null,
+    }),
   }))
 }
