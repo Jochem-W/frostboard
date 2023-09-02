@@ -2,12 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import LeaderboardEntry from "./LeaderboardEntry"
-import { levelForTotalXp, totalXpForLevel, xpForLevelUp } from "@/utils/xp"
+import { levelForTotalXp, xpForLevelUp } from "@/utils/xp"
+import fetchUsers from "@/actions/fetchUsers"
 
 export default function Leaderboard({
-  users,
+  initial,
 }: {
-  users: {
+  initial: {
     id: string
     avatarUrl: string
     xp: number
@@ -17,12 +18,22 @@ export default function Leaderboard({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [observer, setObserver] = useState<IntersectionObserver>()
-  const [limit, setLimit] = useState(25)
+  const [users, setUsers] = useState<
+    {
+      id: string
+      avatarUrl: string
+      xp: number
+      name: string
+      discriminator: string
+    }[]
+  >(initial)
 
   const intersectionCallback = useCallback(
     (entries: IntersectionObserverEntry[]) =>
       entries.find((entry) => entry.isIntersecting)
-        ? setLimit((prev) => Math.min(prev + 25, users.length))
+        ? fetchUsers(10, users.length)
+            .then((value) => setUsers((prev) => [...prev, ...value]))
+            .catch(console.error)
         : null,
     [users.length],
   )
@@ -46,25 +57,30 @@ export default function Leaderboard({
       return
     }
 
-    const atLimit = current.children[limit - 5]
-    const atEnd = current.children[current.children.length - 1]
-    if (!atLimit || !atEnd) {
-      return
+    const atLimit = current.children[Math.max(current.children.length - 10, 0)]
+    if (atLimit) {
+      observer.observe(atLimit)
     }
 
-    observer.observe(atLimit)
-    observer.observe(atEnd)
-    return () => {
-      observer.unobserve(atLimit)
-      observer.unobserve(atEnd)
+    const atEnd = current.children[current.children.length - 1]
+    if (atEnd) {
+      observer.observe(atEnd)
     }
-  }, [limit, observer])
+    return () => {
+      if (atLimit) {
+        observer.unobserve(atLimit)
+      }
+
+      if (atEnd) {
+        observer.unobserve(atEnd)
+      }
+    }
+  }, [observer])
 
   return (
     <div className="flex w-full flex-col gap-4" ref={ref}>
-      {users.slice(0, limit).map((user, i) => {
+      {users.map((user, i) => {
         const level = levelForTotalXp(user.xp)
-        user.xp -= totalXpForLevel(level)
 
         return (
           <LeaderboardEntry
@@ -72,7 +88,7 @@ export default function Leaderboard({
             user={user}
             key={user.id}
             level={level}
-            xp={user.xp}
+            xp={Math.floor(0.5 * xpForLevelUp(level))}
             xpMax={xpForLevelUp(level)}
           ></LeaderboardEntry>
         )
