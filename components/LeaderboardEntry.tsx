@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import { CSSProperties } from "react"
+import Avatar from "./Avatar"
 import { User } from "@/actions/fetchUsers"
 
 export default function LeaderboardEntry({
@@ -44,13 +44,14 @@ export default function LeaderboardEntry({
       <section className="z-10 flex grow flex-col justify-center gap-2 p-2">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <section className="flex items-center gap-4">
-            <Image
+            <Avatar
               src={user.avatarUrl}
               width={48}
               height={48}
               alt="Avatar"
               className="shrink-0 rounded-full"
-            ></Image>
+              fallbackSrc={user.avatarFallback}
+            ></Avatar>
             <span className="break-all">{user.name}</span>
           </section>
           <span>level {level}</span>
