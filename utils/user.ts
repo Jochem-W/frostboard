@@ -11,6 +11,7 @@ type Options = {
   format?: Exclude<ImageFormat, ImageFormat.GIF | ImageFormat.Lottie>
   animatedFormat?: Exclude<ImageFormat, ImageFormat.Lottie>
   size?: ImageSize
+  animatedSizeOverride?: ImageSize
 }
 
 export function avatarUrl(
@@ -20,13 +21,16 @@ export function avatarUrl(
   const format = options?.format ?? ImageFormat.PNG
   const animatedFormat = options?.animatedFormat ?? ImageFormat.GIF
   const size = options?.size ?? 4096
+  const animatedSize = options?.animatedSizeOverride ?? options?.size
+
+  const isAnimated = user.avatar?.startsWith("a_")
 
   if (user.avatar) {
     return `https://cdn.discordapp.com${CDNRoutes.userAvatar(
       user.id,
       user.avatar,
-      user.avatar?.startsWith("a_") ? animatedFormat : format,
-    )}?size=${size}`
+      isAnimated ? animatedFormat : format,
+    )}?size=${isAnimated ? animatedSize : size}`
   }
 
   if (user.discriminator !== "0") {

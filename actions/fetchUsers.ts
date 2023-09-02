@@ -28,7 +28,7 @@ export default async function fetchUsers(limit?: number, offset?: number) {
     id: user.id,
     name: user.name,
     discriminator: user.discriminator,
-    avatarUrl: avatarUrl(user),
+    avatarUrl: avatarUrl(user, { animatedSizeOverride: 128 }),
     xp: user.xp,
     avatarFallback: avatarUrl({
       id: user.id,
