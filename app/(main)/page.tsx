@@ -1,16 +1,22 @@
 import fetchUsers from "@/actions/fetchUsers"
 import Leaderboard from "@/components/Leaderboard"
-import discord from "@/utils/discord"
+import { fetchGuild } from "@/utils/discord"
 import { Variables } from "@/utils/variables"
-import { Routes, RESTGetAPIGuildResult } from "discord-api-types/v10"
+import { Metadata } from "next"
 
 export const dynamic = "force-dynamic"
 
-export default async function Home() {
-  const guild = (await discord.get(
-    Routes.guild(Variables.guildId),
-  )) as RESTGetAPIGuildResult
+export async function generateMetadata(): Promise<Metadata> {
+  const guild = await fetchGuild(Variables.guildId)
 
+  return {
+    title: `${guild.name} | Leaderboard`.toLowerCase(),
+    description: `Leaderboard for the ${guild.name} Discord server.`,
+  }
+}
+
+export default async function Home() {
+  const guild = await fetchGuild(Variables.guildId)
   const users = await fetchUsers(50, 0)
 
   return (

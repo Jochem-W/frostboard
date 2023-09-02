@@ -1,4 +1,3 @@
-import { ImageSize } from "@discordjs/rest"
 import {
   APIUser,
   CDNRoutes,
@@ -6,6 +5,7 @@ import {
   ImageFormat,
 } from "discord-api-types/v10"
 import "server-only"
+import { ImageSize } from "./discord"
 
 type Options = {
   format?: Exclude<ImageFormat, ImageFormat.GIF | ImageFormat.Lottie>

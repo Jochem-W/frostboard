@@ -1,22 +1,26 @@
-import { REST } from "@discordjs/rest"
+import {
+  RESTGetAPIGuildResult,
+  RouteBases,
+  Routes,
+} from "discord-api-types/v10"
 import { Variables } from "./variables"
 import "server-only"
 
-function singleton() {
-  //@ts-expect-error
-  return new REST({ makeRequest: fetch }).setToken(Variables.botToken)
-}
+export type ImageSize = 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096
 
-type Singleton = ReturnType<typeof singleton>
+export async function fetchGuild(
+  ...params: Parameters<(typeof Routes)["guild"]>
+) {
+  const response = await fetch(RouteBases.api + Routes.guild(...params), {
+    headers: { Authorization: `Bot ${Variables.botToken}` },
+    next: { revalidate: 60 },
+  })
+  if (!response.ok) {
+    throw new Error("Couldn't fetch the guild")
+  }
 
-const globalForSingleton = globalThis as unknown as {
-  discord: Singleton | undefined
-}
+  console.log(JSON.stringify(Object.fromEntries(response.headers.entries())))
 
-const discord = globalForSingleton.discord ?? singleton()
-
-export default discord
-
-if (process.env.NODE_ENV !== "production") {
-  globalForSingleton.discord = discord
+  const json = await response.json()
+  return json as RESTGetAPIGuildResult
 }

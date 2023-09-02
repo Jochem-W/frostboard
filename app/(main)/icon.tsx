@@ -1,11 +1,6 @@
-import discord from "@/utils/discord"
+import { fetchGuild } from "@/utils/discord"
 import { Variables } from "@/utils/variables"
-import {
-  Routes,
-  RESTGetAPIGuildResult,
-  CDNRoutes,
-  ImageFormat,
-} from "discord-api-types/v10"
+import { CDNRoutes, ImageFormat, RouteBases } from "discord-api-types/v10"
 import { ImageResponse } from "next/server"
 
 export const size = {
@@ -13,20 +8,18 @@ export const size = {
   height: 32,
 }
 export const contentType = "image/png"
-export const revalidate = 24 * 60 * 60
+export const revalidate = 60
 
 export default async function Page() {
-  const guild = (await discord.get(
-    Routes.guild(Variables.guildId),
-  )) as RESTGetAPIGuildResult
+  const guild = await fetchGuild(Variables.guildId)
 
   const guildIcon = guild.icon
-    ? `https://cdn.discordapp.com/${CDNRoutes.guildIcon(
+    ? `${RouteBases.cdn}/${CDNRoutes.guildIcon(
         guild.id,
         guild.icon,
         ImageFormat.PNG,
       )}?size=4096`
-    : "https://cdn.discordapp.com/embed/avatars/0.png"
+    : RouteBases.cdn + CDNRoutes.defaultUserAvatar(0)
 
   return new ImageResponse(
     (
