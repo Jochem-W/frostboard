@@ -1,42 +1,43 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import LeaderboardEntry from "./LeaderboardEntry"
 import { levelForTotalXp, totalXpForLevel, xpForLevelUp } from "@/utils/xp"
 import fetchUsers, { User } from "@/actions/fetchUsers"
 
-const limit = 10
+const fetchCount = 25
 
 export default function Leaderboard({ initial }: { initial: User[] }) {
   const ref = useRef<HTMLElement>(null)
   const [observer, setObserver] = useState<IntersectionObserver>()
   const [users, setUsers] = useState(initial)
-  const [offset, setOffset] = useState(initial.length)
+  const [offset, setOffset] = useState<number>()
 
   useEffect(() => {
-    fetchUsers(limit, offset)
+    if (offset === undefined) {
+      return
+    }
+
+    fetchUsers(fetchCount, offset)
       .then((value) => setUsers((prev) => [...prev, ...value]))
       .catch(console.error)
   }, [offset])
-
-  const intersectionCallback = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      if (!entries.find((entry) => entry.isIntersecting)) {
-        return
-      }
-
-      setOffset((prev) => prev + limit)
-    },
-    [],
-  )
 
   useEffect(
     () =>
       setObserver((prev) => {
         prev?.disconnect()
-        return new IntersectionObserver(intersectionCallback)
+        return new IntersectionObserver(
+          (entries: IntersectionObserverEntry[]) => {
+            if (!entries.find((entry) => entry.isIntersecting)) {
+              return
+            }
+
+            setOffset((prev) => (prev ?? initial.length) + fetchCount)
+          },
+        )
       }),
-    [intersectionCallback],
+    [initial.length],
   )
 
   useEffect(() => {
@@ -49,7 +50,10 @@ export default function Leaderboard({ initial }: { initial: User[] }) {
       return
     }
 
-    const atOffset = current.children[users.length - limit]
+    const atOffset =
+      current.children[
+        Math.max(users.length - fetchCount, Math.floor(users.length / 2))
+      ]
     if (atOffset) {
       observer.observe(atOffset)
     }
