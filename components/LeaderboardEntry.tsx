@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { CSSProperties } from "react"
+import { User } from "@/actions/fetchUsers"
 
 export default function LeaderboardEntry({
   user,
@@ -10,12 +11,7 @@ export default function LeaderboardEntry({
   xpMax,
   level,
 }: {
-  user: {
-    id: string
-    discriminator: string
-    name: string
-    avatarUrl: string
-  }
+  user: User
   position: number
   xp: number
   xpMax: number
