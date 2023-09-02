@@ -11,7 +11,7 @@ export default async function Home() {
     Routes.guild(Variables.guildId),
   )) as RESTGetAPIGuildResult
 
-  const users = await fetchUsers(10, 0)
+  const users = await fetchUsers(50, 0)
 
   return (
     <>
