@@ -82,14 +82,14 @@ export default function LeaderboardEntry({
           ></Avatar>
           <span className="break-all">{user.name}</span>
         </header>
-        <section className="flex items-end justify-between text-sm sm:text-lg">
+        <section className="flex items-end justify-between text-sm lowercase sm:text-lg">
           <span>
             <span className="text-3xl font-bold leading-none sm:text-6xl">
               {xp}
             </span>
-            /{xpMax} xp
+            /{xpMax} XP
           </span>
-          <span>level {level}</span>
+          <span>Level {level}</span>
         </section>
       </section>
     </section>
