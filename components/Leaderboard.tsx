@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import LeaderboardEntry from "./LeaderboardEntry"
-import { levelForTotalXp, xpForLevelUp } from "@/utils/xp"
+import { levelForTotalXp, totalXpForLevel, xpForLevelUp } from "@/utils/xp"
 import fetchUsers, { User } from "@/actions/fetchUsers"
 
 const limit = 10
@@ -81,7 +81,7 @@ export default function Leaderboard({ initial }: { initial: User[] }) {
             user={user}
             key={user.id}
             level={level}
-            xp={user.xp}
+            xp={user.xp - totalXpForLevel(level)}
             xpMax={xpForLevelUp(level)}
           ></LeaderboardEntry>
         )
