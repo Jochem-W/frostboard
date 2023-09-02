@@ -1,7 +1,6 @@
 "use server"
 
 import { usersTable } from "@/schema"
-import { ImageFormat } from "discord-api-types/v10"
 import { desc, asc, eq } from "drizzle-orm"
 import orm from "../utils/orm"
 import { avatarUrl } from "../utils/user"
