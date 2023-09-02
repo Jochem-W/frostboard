@@ -46,10 +46,18 @@ export default function LeaderboardEntry({
           <section className="flex items-center gap-4">
             <Avatar
               src={user.avatarUrl}
+              width={64}
+              height={64}
+              alt="Avatar"
+              className="hidden shrink-0 rounded-full sm:block"
+              fallbackSrc={user.avatarFallback}
+            ></Avatar>
+            <Avatar
+              src={user.avatarUrl}
               width={48}
               height={48}
               alt="Avatar"
-              className="shrink-0 rounded-full"
+              className="shrink-0 rounded-full sm:hidden"
               fallbackSrc={user.avatarFallback}
             ></Avatar>
             <span className="break-all">{user.name}</span>
