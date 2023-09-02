@@ -13,11 +13,11 @@ export default function RootLayout({
       <body
         className={`${mono.className} flex min-h-[100svh] w-full flex-col items-center p-4 dark:bg-neutral-900`}
       >
-        <div className="container">
+        <section className="container">
           <header className="flex"></header>
           <main className="flex flex-col items-center gap-4">{children}</main>
           <footer className="flex"></footer>
-        </div>
+        </section>
       </body>
     </html>
   )

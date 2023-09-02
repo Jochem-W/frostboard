@@ -8,7 +8,7 @@ import fetchUsers, { User } from "@/actions/fetchUsers"
 const limit = 10
 
 export default function Leaderboard({ initial }: { initial: User[] }) {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLElement>(null)
   const [observer, setObserver] = useState<IntersectionObserver>()
   const [users, setUsers] = useState(initial)
   const [offset, setOffset] = useState(initial.length)
@@ -71,7 +71,7 @@ export default function Leaderboard({ initial }: { initial: User[] }) {
   }, [observer, users.length])
 
   return (
-    <div className="flex w-full flex-col gap-4" ref={ref}>
+    <section className="flex w-full flex-col items-center gap-4" ref={ref}>
       {users.map((user, i) => {
         const level = levelForTotalXp(user.xp)
 
@@ -86,6 +86,6 @@ export default function Leaderboard({ initial }: { initial: User[] }) {
           ></LeaderboardEntry>
         )
       })}
-    </div>
+    </section>
   )
 }
