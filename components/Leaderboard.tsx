@@ -81,7 +81,7 @@ export default function Leaderboard({ initial }: { initial: User[] }) {
             user={user}
             key={user.id}
             level={level}
-            xp={Math.floor(0.5 * xpForLevelUp(level))}
+            xp={user.xp}
             xpMax={xpForLevelUp(level)}
           ></LeaderboardEntry>
         )
