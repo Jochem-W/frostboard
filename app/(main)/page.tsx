@@ -28,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary",
     },
+    themeColor: "#ffffff",
   }
 }
 
