@@ -25,6 +25,9 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       images: `${guildIcon}?size=256`,
     },
+    twitter: {
+      card: "summary",
+    },
   }
 }
 
