@@ -21,10 +21,10 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className="hyphens-auto text-center text-7xl font-thin lowercase">
+      <h1 className="max-w-full hyphens-auto break-words text-center text-7xl font-thin lowercase">
         {guild.name}
       </h1>
-      <h2 className="hyphens-auto text-center text-4xl font-extralight lowercase">
+      <h2 className="hyphens-auto break-words text-center text-4xl font-extralight lowercase">
         🏆 Leaderboard
       </h2>
       <Leaderboard initial={users}></Leaderboard>
