@@ -19,8 +19,6 @@ export async function fetchGuild(
     throw new Error("Couldn't fetch the guild")
   }
 
-  console.log(JSON.stringify(Object.fromEntries(response.headers.entries())))
-
   const json = await response.json()
   return json as RESTGetAPIGuildResult
 }
