@@ -56,10 +56,14 @@ export default function LeaderboardEntry({
 
   return (
     <section
-      className={`${colour} relative flex w-full max-w-4xl gap-4 overflow-hidden break-words border border-neutral-200 bg-gradient-to-r px-2 py-4 text-2xl font-extralight before:absolute before:right-0 before:top-0 before:h-full before:w-[--width] before:bg-neutral-100 dark:border-neutral-700 before:dark:bg-neutral-800 sm:text-3xl`}
+      className={`${colour} relative flex w-full max-w-4xl flex-col gap-2 overflow-hidden break-words border border-neutral-200 bg-gradient-to-r text-2xl font-extralight before:absolute before:right-0 before:top-0 before:h-full before:w-[--width] before:bg-neutral-100 dark:border-neutral-700 before:dark:bg-neutral-800 sm:flex-row sm:gap-4 sm:px-2 sm:py-4 sm:text-3xl`}
       style={{ "--width": `${100 - 100 * (xp / xpMax)}%` } as CSSProperties}
     >
-      <span className={`z-10 flex items-center ${positionWidth(position)}`}>
+      <span
+        className={`z-10 flex items-center ${positionWidth(
+          position,
+        )} w-full bg-neutral-200 p-2 dark:bg-neutral-900 sm:w-auto sm:bg-transparent sm:p-0`}
+      >
         #{position}
       </span>
       <section className="z-10 flex grow flex-col justify-center gap-4 p-2">
