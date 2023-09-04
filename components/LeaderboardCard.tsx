@@ -23,7 +23,7 @@ export default function LeaderboardCard({
 }) {
   return (
     <main
-      className="relative flex h-[384px] w-[1025px] flex-col bg-gradient-to-r from-blue-500  to-cyan-500 text-5xl font-extralight text-white before:absolute before:right-0 before:top-0 before:h-full before:w-[--width] before:bg-neutral-800"
+      className="relative flex h-[384px] w-[1024px] flex-col bg-gradient-to-r from-blue-500  to-cyan-500 text-5xl font-extralight text-white before:absolute before:right-0 before:top-0 before:h-full before:w-[--width] before:bg-neutral-800"
       style={{ "--width": `${100 - 100 * (xp / xpMax)}%` } as CSSProperties}
     >
       <header className="z-10 flex items-center justify-between gap-8 bg-neutral-900 p-4">
