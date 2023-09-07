@@ -42,14 +42,6 @@ export default function LeaderboardEntry({
       colour =
         "from-amber-400 to-yellow-400 dark:from-amber-500 dark:to-yellow-500"
       break
-    case 2:
-      colour =
-        "from-neutral-400 to-neutral-400 dark:from-neutral-500 dark:to-neutral-500"
-      break
-    case 3:
-      colour =
-        "from-brown-500 to-brown-500 dark:from-brown-900 dark:to-brown-900"
-      break
     default:
       colour = "from-blue-300 to-cyan-300 dark:from-blue-500 dark:to-cyan-500"
   }
