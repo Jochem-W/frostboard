@@ -4,7 +4,6 @@ const nextConfig = {
     domains: ["cdn.discordapp.com"],
     formats: ["image/avif", "image/webp"],
   },
-  experimental: { serverActions: true },
 }
 
 module.exports = nextConfig

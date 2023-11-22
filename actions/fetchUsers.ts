@@ -8,22 +8,14 @@ import { ImageFormat } from "discord-api-types/v10"
 
 export type User = Awaited<ReturnType<typeof fetchUsers>>[0]
 
-export default async function fetchUsers(limit?: number, offset?: number) {
-  let query = orm
+export default async function fetchUsers(limit: number, offset: number) {
+  const result = await orm
     .select()
     .from(usersTable)
     .orderBy(desc(usersTable.xp), asc(usersTable.id))
     .where(eq(usersTable.member, true))
-
-  if (limit) {
-    query = query.limit(limit)
-  }
-
-  if (offset) {
-    query = query.offset(offset)
-  }
-
-  const result = await query
+    .limit(limit)
+    .offset(offset)
 
   return result.map((user) => ({
     id: user.id,
