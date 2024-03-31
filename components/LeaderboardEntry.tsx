@@ -54,7 +54,7 @@ export default function LeaderboardEntry({
       <span
         className={`${positionWidth(
           position,
-        )} z-10 flex w-full items-center bg-neutral-200 p-2 dark:bg-neutral-900 sm:w-auto sm:bg-transparent sm:p-0`}
+        )} z-10 flex w-full items-center bg-neutral-200 p-2 dark:bg-neutral-900 sm:w-auto sm:dark:bg-transparent sm:bg-transparent sm:p-0`}
       >
         #{position}
       </span>
