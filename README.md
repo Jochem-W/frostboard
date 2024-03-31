@@ -1,3 +1,3 @@
 # frostboard
 
-Public leaderboard for [@SLASHERCATS](https://twitter.com/SLASHERCATS) Discord server.
+Public leaderboard for a now defunct Discord server.
