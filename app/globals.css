@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    background: black;
-    color: white;
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      background: black;
+      color: white;
+    }
   }
 }
